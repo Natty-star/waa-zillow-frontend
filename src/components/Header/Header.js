@@ -1,7 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
+
 export default function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("jwt");
+    navigate("/login");
+  };
   return (
     <nav>
       <div class="nav-wrapper">
@@ -43,9 +51,14 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link className="black-text" to="/sign-up">
+            <Link className="black-text" to="/signup">
               Sign up
             </Link>
+          </li>
+          <li>
+            <button type="button" onClick={handleLogout}>
+              Log out
+            </button>
           </li>
           <li>
             <a href="" className="black-text">

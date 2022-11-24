@@ -13,7 +13,7 @@ export default function PageRoutes() {
     <Routes>
       <Route path="/" element={<Properties />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/properties" element={<Properties />} />
       <Route />
     </Routes>
