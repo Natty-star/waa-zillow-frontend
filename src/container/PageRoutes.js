@@ -1,11 +1,8 @@
-import { Rule } from "@mui/icons-material";
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Properties from "../components/properties/Properties";
 // import Property from '../components/properties/property/Property'
 import Property from "../components/properties/property/Property";
-import Login from "../components/UserManagment/Login";
-import SignUp from "../components/UserManagment/SignUp";
 
 // import
 
