@@ -1,19 +1,22 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Properties from '../components/properties/Properties'
+import { Rule } from "@mui/icons-material";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Properties from "../components/properties/Properties";
 // import Property from '../components/properties/property/Property'
-import Property from '../components/properties/property/Property'
+import Property from "../components/properties/property/Property";
+import Login from "../components/UserManagment/Login";
+import SignUp from "../components/UserManagment/SignUp";
 
-// import 
+// import
 
 export default function PageRoutes() {
   return (
-   <Routes>
-        <Route path='/' element={<Properties/>}/>
-        <Route path='/login' element={<Property/>} />
-        <Route path='/properties' element={<Properties/>}/> 
-        <Route/>
-
-   </Routes>
-  )
+    <Routes>
+      <Route path="/" element={<Properties />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/properties" element={<Properties />} />
+      <Route />
+    </Routes>
+  );
 }
