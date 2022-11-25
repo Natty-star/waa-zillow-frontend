@@ -1,12 +1,17 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Properties from "../components/properties/Properties";
-import Property from "../components/properties/customer/property/Property";
 import Login from "../components/UserManagment/Login";
 import SignUp from "../components/UserManagment/SignUp";
 import PropertyDetail from "../components/properties/customer/propertyDetail/PropertyDetail";
 import Orders from "../components/order/owner/orders/Orders";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import ForgotPassword from "../components/UserManagment/ForgotPassword";
+
+import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+
+// import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+
 
 export default function PageRoutes() {
   return (
@@ -20,6 +25,8 @@ export default function PageRoutes() {
       <Route path="/orders" element={<Orders />} />
 
       <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
+      <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+      <Route path="/addProperties" element={<AddProperty />} />
     </Routes>
   );
 }
