@@ -1,6 +1,7 @@
 import React from "react";
 import "./property.css";
 
+import { Link } from "react-router-dom";
 export default function Property(props) {
   const property = props.property;
   return (
@@ -17,13 +18,23 @@ export default function Property(props) {
           <div className="left">
             <h6>$ {property.price}</h6>
           </div>
-          {property.category == "BUY" ? (
+          {property.category == "SELL" ? (
             <div className="right">
-              <a  class="waves-effect waves-light btn right">BUY</a>
+              <Link
+                to={`${property.id}`}
+                class="waves-effect waves-light btn right"
+              >
+                BUY
+              </Link>
             </div>
           ) : (
             <div className="right">
-              <a class="waves-effect waves-light btn right">RENT</a>
+              <Link
+                to={`${property.id}`}
+                class="waves-effect waves-light btn right"
+              >
+                RENT
+              </Link>
             </div>
           )}
         </div>
@@ -32,14 +43,16 @@ export default function Property(props) {
 
         <div className="card-action">
           <p className="tail waves-effect waves-light">
-            <i class="material-icons left">straighten</i> 1200 sq ft
+            <i class="material-icons left">straighten</i> {property.area} sq ft
           </p>
 
           <p className=" tail waves-effect waves-light">
-            <i class="material-icons left">bed</i>{property.bedrooms}
+            <i class="material-icons left">bed</i>
+            {property.bedrooms}
           </p>
           <p className="tail waves-effect waves-light">
-            <i className="material-icons left">shower</i>12
+            <i className="material-icons left">shower</i>
+            {property.bathrooms}
           </p>
         </div>
       </div>
