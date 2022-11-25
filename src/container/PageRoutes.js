@@ -10,10 +10,9 @@ export default function PageRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Properties />} />
-      <Route path="login" element={<Login />} />
-      <Route path="sign-up" element={<SignUp />} />
-      <Route path="properties" element={<Properties />}></Route>
-      <Route path="properties/:id" element={<PropertyDetail />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/properties" element={<Properties />} />
       <Route />
     </Routes>
   );

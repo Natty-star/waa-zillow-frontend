@@ -12,18 +12,129 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { validateEmail } from "../../common/validateEmail";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
 
 const theme = createTheme();
 
 const SignUp = () => {
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPassword, setValidPassword] = useState(true);
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    if (
+      validateEmail(data.get("email")) &&
+      data.get("email") &&
+      data.get("password")
+    ) {
+      setValidEmail(true);
+      axios
+        .post("http://localhost:8080/api/v1/users/register", {
+          email: data.get("email"),
+          password: data.get("password"),
+          address: { country: data.get("country") },
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          roles: [
+            {
+              name: role,
+            },
+          ],
+        })
+        .then((response) => {
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      if (!data.get("password")) {
+        setValidPassword(false);
+      }
+      if (validateEmail(data.get("email"))) {
+        setValidEmail(true);
+      } else {
+        setValidEmail(false);
+      }
+    }
   };
+
+  useEffect(() => {
+    let localValue = localStorage.getItem("jwt");
+    if (localValue) {
+      navigate("/");
+    } else {
+      navigate("/signup");
+    }
+  }, []);
+
+  const [role, setRole] = React.useState("");
+
+  const handleRoleChange = (event) => {
+    setRole(event.target.value);
+  };
+
+  const inValidInput = (
+    <TextField
+      error
+      helperText="Incorrect email format."
+      required
+      fullWidth
+      id="email"
+      label="Email Address"
+      name="email"
+      autoComplete="email"
+    />
+  );
+  const validInput = (
+    <TextField
+      required
+      fullWidth
+      id="email"
+      label="Email Address"
+      name="email"
+      autoComplete="email"
+    />
+  );
+  const inValidInputPassword = (
+    <TextField
+      error
+      helperText="Can not be empty"
+      required
+      fullWidth
+      id="password"
+      label="Password"
+      type="password"
+      name="password"
+      autoComplete="password"
+    />
+  );
+  const validInputPassword = (
+    <TextField
+      required
+      fullWidth
+      id="password"
+      label="Password"
+      type="password"
+      name="password"
+      autoComplete="new-password"
+    />
+  );
 
   return (
     <ThemeProvider theme={theme}>
@@ -71,34 +182,38 @@ const SignUp = () => {
                   autoComplete="family-name"
                 />
               </Grid>
+
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
+                {validEmail ? validInput : inValidInput}
+              </Grid>
+
+              <Grid item xs={12}>
+                {validPassword ? validInputPassword : inValidInputPassword}
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+                  id="country"
+                  label="Country"
+                  name="country"
+                  autoComplete="family-name"
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Role</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={role}
+                    label="Role"
+                    onChange={handleRoleChange}
+                  >
+                    <MenuItem value={"customer"}>Customer</MenuItem>
+                    <MenuItem value={"owner"}>Owner</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
             </Grid>
             <Button
@@ -118,7 +233,6 @@ const SignUp = () => {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
     </ThemeProvider>
   );

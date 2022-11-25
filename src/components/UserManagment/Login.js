@@ -11,19 +11,56 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const theme = createTheme();
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [loginError, setLoginError] = useState("");
+
+  const [jwtData, setJwtData] = useState();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get("email"),
+      username: data.get("email"),
       password: data.get("password"),
     });
+
+    axios
+      .post("http://localhost:8080/api/v1/authentication/authenticate", {
+        username: data.get("email"),
+        password: data.get("password"),
+      })
+      .then((response) => {
+        console.log(response.data);
+        let jwt = response.data.jwt;
+        localStorage.setItem("jwt", JSON.stringify(jwt));
+        let decoded = jwt_decode(jwt);
+        let user = JSON.parse(decoded.sub);
+        localStorage.setItem("user", JSON.stringify(user));
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoginError("You have entered invalid username or password!");
+      });
   };
+
+  useEffect(() => {
+    let localValue = localStorage.getItem("jwt");
+    if (localValue) {
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
