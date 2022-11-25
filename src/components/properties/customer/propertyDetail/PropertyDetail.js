@@ -1,19 +1,84 @@
 import { Divider, ImageList, ImageListItem } from "@mui/material";
 import axios from "axios";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useRef, useState } from "react";
 
 import { useParams } from "react-router-dom";
 import "./propertyDetail.css";
 export default function PropertyDetail() {
+  const formData = useRef();
   const param = useParams();
   const [property, setProperty] = useState({});
 
+  const rentProperty = async (e) => {
+    e.preventDefault();
+    const form = formData.current;
+    const order = {
+      customer: {
+        customerId: "yemane123",
+        customerName: "SilvanaIshak",
+        customerEmail: "se.yemanebalemu@gmail.com",
+      },
+      property: {
+        propertyId: property.id,
+        propertyType: property.category,
+        propertyTitle: property.title,
+      },
+      owner: {
+        ownerId: "ownerID",
+        ownerName: "Yemane Abrha",
+        ownerEmail: property.ownerEmail,
+      },
+      price: property.price,
+      startDate: form["intialdate"].value,
+      endDate: form["finaldate"].value,
+    };
+
+    axios
+      .post("http://localhost:8083/api/v1/orders/", order)
+      .then((response) => {
+        console.log("Submited Success fully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    console.log(order);
+  };
+
+  const buyProperty = async (e) => {
+    const order = {
+      customer: {
+        customerId: "yemane123",
+        customerName: "SilvanaIshak",
+        customerEmail: "se.yemanebalemu@gmail.com",
+      },
+      property: {
+        propertyId: property.id,
+        propertyType: property.category,
+        propertyTitle: property.title,
+      },
+      owner: {
+        ownerId: "ownerID",
+        ownerName: "Yemane Abrha",
+        ownerEmail: property.ownerEmail,
+      },
+      price: property.price,
+      startDate: "Today",
+      endDate: "No Limit",
+    };
+    axios
+      .post("http://localhost:8083/api/v1/orders/", order)
+      .then((response) => {
+        console.log("Submited Success fully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
   const fetchProduct = () => {
     axios
       .get("http://localhost:8084/api/v1/property/" + param.id)
 
       .then((response) => {
-        console.log(response.data);
         setProperty(response.data);
       })
       .catch((err) => {
@@ -26,7 +91,7 @@ export default function PropertyDetail() {
 
   return (
     <div>
-      {property !== null ? (
+      {property != null && property.images != null ? (
         <div className="detail">
           <div className="left-detail">
             <ImageList
@@ -95,22 +160,31 @@ export default function PropertyDetail() {
                 </div>
                 {property.category == "RENT" ? (
                   <div>
-                    <label for="first_name">Intial Date</label>
-                    <input type="date" labe class="datepicker" />
-                    <label for="first_name">Final Date</label>
-                    <input type="date" labe class="datepicker" />
-
-                    <button className="succcess btn-large">RENT</button>
+                    <form ref={formData}>
+                      <label for="first_name">Intial Date</label>
+                      <input name="intialdate" type="date" class="datepicker" />
+                      <label for="first_name">Final Date</label>
+                      <input type="date" name="finaldate" class="datepicker" />
+                      <button
+                        name="action"
+                        onClick={rentProperty}
+                        className="succcess btn-large"
+                      >
+                        RENT
+                      </button>
+                    </form>
                   </div>
                 ) : (
-                  <button className="succcess btn-large ">BUY</button>
+                  <button onClick={buyProperty} className="succcess btn-large ">
+                    BUY
+                  </button>
                 )}
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div>there is not da</div>
+        <div>No Data</div>
       )}
     </div>
   );

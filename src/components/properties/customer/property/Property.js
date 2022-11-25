@@ -37,6 +37,17 @@ export default function Property(props) {
               </Link>
             </div>
           )}
+          {/* <button className="btn"> */}
+          <i
+            onClick={() => {
+              props.addToFev(property);
+              console.log("Clicked");
+            }}
+            className="material-icons "
+          >
+            favorite
+          </i>
+          {/* </button> */}
         </div>
         <br />
         <div className="divider"></div>
