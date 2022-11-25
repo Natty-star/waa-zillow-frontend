@@ -18,12 +18,10 @@ import jwt_decode from "jwt-decode";
 
 const theme = createTheme();
 
-const Login = () => {
-  const navigate = useNavigate();
+const ForgotPassword = () => {
   const [loginError, setLoginError] = useState("");
 
-  const [jwtData, setJwtData] = useState();
-
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -33,17 +31,12 @@ const Login = () => {
     });
 
     axios
-      .post("http://localhost:8080/api/v1/authentication/authenticate", {
+      .post("http://localhost:8080/api/v1/users/reset-password", {
         username: data.get("email"),
         password: data.get("password"),
       })
       .then((response) => {
         console.log(response.data);
-        let jwt = response.data.jwt;
-        localStorage.setItem("jwt", JSON.stringify(jwt));
-        let decoded = jwt_decode(jwt);
-        let user = JSON.parse(decoded.sub);
-        localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
       })
       .catch((err) => {
@@ -52,14 +45,9 @@ const Login = () => {
       });
   };
 
-  useEffect(() => {
-    let localValue = localStorage.getItem("jwt");
-    if (localValue) {
-      navigate("/");
-    } else {
-      navigate("/login");
-    }
-  }, []);
+  //   useEffect(() => {
+  //     handleSubmit();
+  //   }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,7 +65,7 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forgot Password
           </Typography>
           <Box
             component="form"
@@ -115,20 +103,20 @@ const Login = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Change Password
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/forgot-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            {/* <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid> */}
           </Box>
         </Box>
         {/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
@@ -137,4 +125,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
