@@ -46,6 +46,11 @@ export default function Header() {
             </a>
           </li>
           <li>
+            <a href="/addProperties" className="black-text">
+              Add properties
+            </a>
+          </li>
+          <li>
             <Link className="black-text" to="/login">
               Sign in
             </Link>
