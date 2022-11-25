@@ -6,6 +6,7 @@ import Login from "../components/UserManagment/Login";
 import SignUp from "../components/UserManagment/SignUp";
 import PropertyDetail from "../components/properties/customer/propertyDetail/PropertyDetail";
 import Orders from "../components/order/owner/orders/Orders";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
 
 export default function PageRoutes() {
   return (
@@ -17,6 +18,8 @@ export default function PageRoutes() {
       <Route path="/properties/:id" element={<PropertyDetail />} />
       <Route />
       <Route path="/orders" element={<Orders />} />
+
+      <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
     </Routes>
   );
 }

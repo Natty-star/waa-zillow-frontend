@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./header.css";
+import logo from "../../asset/logo.png"
+
 
 export default function Header() {
   const navigate = useNavigate();
@@ -13,9 +15,11 @@ export default function Header() {
   return (
     <nav>
       <div class="nav-wrapper">
-        <a href="#" className="black-text brand-logo center">
-          Loggo
-        </a>
+        {/* <a href="#" className="black-text brand-logo center">
+          <img src={logo}
+            style={{ height: 64, width: 170 }}
+            alt="logo" />
+        </a> */}
         <ul id="nav-mobile" class="left hide-on-med-and-down">
           <li>
             <a href="sass.html" className="black-text">
