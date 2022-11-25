@@ -45,7 +45,7 @@ export default function Properties() {
     },
   ]);
 
-  const fetchProduct = () => {
+  const fetchProperties = () => {
     axios
       .get("http://localhost:8084/api/v1/property/")
 
@@ -58,7 +58,7 @@ export default function Properties() {
       });
   };
   useEffect(() => {
-    fetchProduct();
+    fetchProperties();
   }, []);
 
   const propertyListHTML = properties.map((property) => {

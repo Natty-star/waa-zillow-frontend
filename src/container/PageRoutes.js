@@ -6,6 +6,9 @@ import SignUp from "../components/UserManagment/SignUp";
 import PropertyDetail from "../components/properties/customer/propertyDetail/PropertyDetail";
 import Orders from "../components/order/owner/orders/Orders";
 import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+// import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+
+
 export default function PageRoutes() {
   return (
     <Routes>
