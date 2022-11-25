@@ -3,14 +3,7 @@ import Order from "../order/Order";
 import { useState,useEffect } from "react";
 import axios from "axios";
 export default function Orders() {
-  const [orders, setorders] = useState([
-    
-     
-    
-  ]);
-
-
-  // http://localhost:8083/api/v1/orders/user/123
+  const [orders, setorders] = useState([]);
 
   const fetchOrders = () => {
 

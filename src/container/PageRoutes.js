@@ -8,6 +8,7 @@ import Orders from "../components/order/owner/orders/Orders";
 import ForgotPassword from "../components/UserManagment/ForgotPassword";
 
 import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+
 // import AddProperty from "../components/properties/customer/addProperty/AddProperty";
 
 
