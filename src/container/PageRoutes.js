@@ -9,9 +9,9 @@ import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import ForgotPassword from "../components/UserManagment/ForgotPassword";
 
 import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+import OwnerLists from "../components/Admin/OwnerLists/OwnerLists";
 
 // import AddProperty from "../components/properties/customer/addProperty/AddProperty";
-
 
 export default function PageRoutes() {
   return (
@@ -24,9 +24,10 @@ export default function PageRoutes() {
       <Route />
       <Route path="/orders" element={<Orders />} />
 
-      <Route path="/admin-dashboard" element={<AdminDashboard/>}></Route>
+      <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
       <Route path="/forgot-password" element={<ForgotPassword />}></Route>
       <Route path="/addProperties" element={<AddProperty />} />
+      <Route path="/uses" element={<OwnerLists />} />
     </Routes>
   );
 }
