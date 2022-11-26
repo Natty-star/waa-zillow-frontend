@@ -8,7 +8,7 @@ export default function Dashbord() {
     <div>
      <Header/>
      <PageRoutes />
-    <OwnerLists />
+    {/* <OwnerLists /> */}
      {/* <Property/> */}
     </div>
   )
