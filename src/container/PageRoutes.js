@@ -7,7 +7,8 @@ import PropertyDetail from "../components/properties/customer/propertyDetail/Pro
 import Orders from "../components/order/owner/orders/Orders";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import ForgotPassword from "../components/UserManagment/ForgotPassword";
-import AddProperty from "../components/properties/customer/addProperty/addProperty";
+import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+
 import Help from "../components/Help/Help";
 
 export default function PageRoutes() {
