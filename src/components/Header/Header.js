@@ -52,44 +52,21 @@ export default function Header() {
         </ul>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          {userRole == "admin" && (
-            <li>
-              <a href="/admin-dashboard" className="black-text">
-                Dashboard
-              </a>
-            </li>
-          )}
-          {userRole == "admin" && (
-            <li>
-              <a href="/users" className="black-text">
-                Manage User
-              </a>
-            </li>
-          )}
-
-          {userRole == "owner" && (
-            <li>
-              <a href="/addProperties" className="black-text">
-                Add properties
-              </a>
-            </li>
-          )}
-          {userRole == "owner" && (
-            <li>
-              <a href="/orders" className="black-text">
-                Manage Rental
-              </a>
-            </li>
-          )}
-
-          {loggedInUser == null && (
-            <li>
-              <Link className="black-text" to="/login">
-                Sign in
-              </Link>
-            </li>
-          )}
-
+          <li>
+            <a href="sass.html" className="black-text">
+              Manage Rental
+            </a>
+          </li>
+          <li>
+            <a href="sass.html" className="black-text">
+              Advertise
+            </a>
+          </li>
+          <li>
+            <Link className="black-text" to="/login">
+              Sign in
+            </Link>
+          </li>
           <li>
             <Link className="black-text" to="/signup">
               Sign up
@@ -104,9 +81,9 @@ export default function Header() {
           )}
 
           <li>
-            <a href="" className="black-text">
+            <Link className="black-text" to="/help">
               <i className="material-icons left">help</i>help
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

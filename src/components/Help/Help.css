@@ -1,0 +1,16 @@
+.help {
+
+    font-style: oblique;
+    text-align: left;
+    padding: 50px;
+}
+
+.section {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.body {
+    font-size: medium;
+    font-weight: normal;
+}

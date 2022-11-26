@@ -7,11 +7,8 @@ import PropertyDetail from "../components/properties/customer/propertyDetail/Pro
 import Orders from "../components/order/owner/orders/Orders";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import ForgotPassword from "../components/UserManagment/ForgotPassword";
-
-import AddProperty from "../components/properties/customer/addProperty/AddProperty";
-import OwnerLists from "../components/Admin/OwnerLists/OwnerLists";
-
-// import AddProperty from "../components/properties/customer/addProperty/AddProperty";
+import AddProperty from "../components/properties/customer/addProperty/addProperty";
+import Help from "../components/Help/Help";
 
 export default function PageRoutes() {
   return (
@@ -27,7 +24,7 @@ export default function PageRoutes() {
       <Route path="/admin-dashboard" element={<AdminDashboard />}></Route>
       <Route path="/forgot-password" element={<ForgotPassword />}></Route>
       <Route path="/addProperties" element={<AddProperty />} />
-      <Route path="/uses" element={<OwnerLists />} />
+      <Route path="/help" element={<Help />} />
     </Routes>
   );
 }
